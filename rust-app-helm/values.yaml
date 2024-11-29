@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: your-registry/your-app
+  repository: rust-app
   tag: latest
 
 service:
