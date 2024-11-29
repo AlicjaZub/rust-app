@@ -1,13 +1,12 @@
-FROM rust:latest
+FROM rust:latest AS builder
 
 WORKDIR /app
 COPY . .
 
 RUN cargo build --release
 
-ENV ROCKET_ADDRESS=0.0.0.0
-ENV ROCKET_PORT=8000
+FROM debian:buster-slim
+WORKDIR /app
+COPY --from=builder /app/target/release/rust-app /app/
 
-EXPOSE 8000
-
-CMD ["cargo", "run", "--release"]
+ENTRYPOINT ["./rust-app"]

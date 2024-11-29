@@ -15,5 +15,11 @@ spec:
       containers:
       - name: rust-app
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: Never
         ports:
-        - containerPort: 8080
+          - containerPort: 8080
+        env:
+          - name: ROCKET_ADDRESS
+            value: "0.0.0.0"
+          - name: ROCKET_PORT
+            value: "8000"
