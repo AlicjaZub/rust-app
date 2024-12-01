@@ -9,4 +9,4 @@ FROM debian:buster-slim
 WORKDIR /app
 COPY --from=builder /app/target/release/rust-app /app/
 
-ENTRYPOINT ["./rust-app"]
+CMD ["./rust-app"]
