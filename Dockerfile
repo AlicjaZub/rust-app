@@ -5,7 +5,7 @@ COPY . .
 
 RUN cargo build --release
 
-FROM debian:bullseye-slim
+FROM ubuntu:latest
 
 WORKDIR /app
 COPY --from=builder /app/target/release/rust-app /app/
