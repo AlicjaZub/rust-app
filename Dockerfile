@@ -1,13 +1,31 @@
-FROM rust:latest AS builder
+FROM rust:latest
 
+# Set working directory
 WORKDIR /app
+
+# Copy source code into the container
 COPY . .
 
+# Build the application in release mode
 RUN cargo build --release
 
-FROM ubuntu:latest
+# Remove unnecessary files to minimize image size
+RUN rm -rf /app/target/debug \
+    /app/src \
+    /app/.git \
+    /app/Cargo.toml \
+    /app/Cargo.lock
 
-WORKDIR /app
-COPY --from=builder /app/target/release/rust-app /app/
+# Set the entrypoint to the compiled binary
+ENV ROCKET_ADDRESS=0.0.0.0
+ENV ROCKET_PORT=8000
 
-CMD ["./rust-app"]
+EXPOSE 8000
+CMD ["cargo", "run"]
+
+# FROM debian:bullseye-slim
+
+# WORKDIR /app
+# COPY --from=builder /app/target/release/rust-app /app/
+
+# CMD ["./rust-app"]
