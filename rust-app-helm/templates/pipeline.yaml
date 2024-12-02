@@ -40,10 +40,13 @@ spec:
         - name: revision
           value: "main"
     - name: build-docker-image
+      workspaces:
+        - name: output
+          workspace: shared-data
       taskRef:
         name: build-docker
       params:
         - name: IMAGE
           value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         - name: CONTEXT
-          value: "/workspace/output"
+          value: "/workspace/shared-data"
