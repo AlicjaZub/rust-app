@@ -12,12 +12,12 @@ spec:
     - name: output
   steps:
     - name: build
-      image: ubuntu
+      image: gcr.io/kaniko-project/executor:latest
       script: |
-        #!/bin/sh
-        echo "Workspace content:"
-        ls -l $(workspaces.output.path)
-
+        #!/busybox/sh
+        /kaniko/executor \
+          --context=$(workspaces.output.path) \
+          --destination=$(params.IMAGE)
     - name: load-to-minikube 
       image: bitnami/kubectl:1.19.7 
       script: | 
