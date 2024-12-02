@@ -36,7 +36,7 @@ spec:
       workspace: shared-data
     params:
       - name: url
-        value: "https://github.com/your-repository.git"
+        value: "https://github.com/AlicjaZub/rust-app.git"
       - name: revision
         value: "main"
   - name: build-docker-image
