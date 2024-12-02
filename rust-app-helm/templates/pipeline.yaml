@@ -32,7 +32,7 @@ spec:
     taskRef:
       name: git-clone
     workspaces:
-    - name: output
+    - name: source
       workspace: shared-data
     params:
       - name: url
@@ -46,4 +46,4 @@ spec:
       - name: IMAGE
         value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
       - name: CONTEXT
-        value: "/workspace/output"
+        value: "/workspace/source"
