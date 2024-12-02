@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: rust-app-build-run
+spec:
+  pipelineRef:
+    name: build-and-deploy-pipeline 
+  resources:
+    - name: source-repo
+      resourceRef:
+        name: "https://github.com/AlicjaZub/rust-app.git"

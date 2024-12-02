@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineResource
+metadata:
+  name: rust-app-repo
+spec:
+  type: git
+  params:
+    - name: url
+      value: "https://github.com/AlicjaZub/rust-app.git" 
+    - name: revision
+      value: "main"
