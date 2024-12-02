@@ -46,4 +46,4 @@ spec:
       - name: IMAGE
         value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
       - name: CONTEXT
-        value: "shared-workspace/repo"
+        value: "/workspace/output/"
