@@ -16,7 +16,7 @@ spec:
       script: |
         #!/busybox/sh
         /kaniko/executor \
-          --context=$(params.CONTEXT) \
+          --context=$(workspaces.output.path)/$(params.CONTEXT) \
           --destination=$(params.IMAGE)
     - name: load-to-minikube 
       image: bitnami/kubectl:1.19.7 
