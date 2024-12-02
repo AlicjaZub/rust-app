@@ -1,14 +1,48 @@
+# apiVersion: tekton.dev/v1beta1
+# kind: Pipeline
+# metadata:
+#   name: build-and-deploy-pipeline
+# spec:
+#   tasks:
+#     - name: build-docker-image
+#       taskRef:
+#         name: build-docker
+#       params:
+#         - name: IMAGE
+#           value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+#         - name: CONTEXT
+#           value: "/workspace/source"
+
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: build-and-deploy-pipeline
+  name: clone-build-push
 spec:
+  description: | 
+    This pipeline clones a git repo, builds a Docker image and
+    pushes it to a registry
+  params:
+  - name: repo-url
+    type: string
+  workspaces:
+  - name: shared-data
   tasks:
-    - name: build-docker-image
-      taskRef:
-        name: build-docker
-      params:
-        - name: IMAGE
-          value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        - name: CONTEXT
-          value: "/workspace/source"
+  - name: fetch-source
+    taskRef:
+      name: git-clone
+    workspaces:
+    - name: output
+      workspace: shared-data
+    params:
+      - name: url
+        value: "https://github.com/your-repository.git"
+      - name: revision
+        value: "main"
+  # - name: build-docker-image
+  #   taskRef:
+  #     name: build-docker
+  #   params:
+  #     - name: IMAGE
+  #       value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+  #     - name: CONTEXT
+  #       value: "/workspace/source"
