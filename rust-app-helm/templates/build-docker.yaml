@@ -17,9 +17,7 @@ spec:
         #!/busybox/sh
         echo "Workspace content:"
         ls -l $(workspaces.output.path)
-        /kaniko/executor \
-          --context=$(workspaces.output.path)/$(params.CONTEXT) \
-          --destination=$(params.IMAGE)
+
     - name: load-to-minikube 
       image: bitnami/kubectl:1.19.7 
       script: | 
