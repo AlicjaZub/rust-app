@@ -13,5 +13,6 @@ spec:
       image: docker:latest
       script: |
         #!/bin/sh
+        eval $(minikube -p minikube docker-env)
         docker build -t $(params.IMAGE) $(params.CONTEXT)
         minikube image load $(params.IMAGE) 
