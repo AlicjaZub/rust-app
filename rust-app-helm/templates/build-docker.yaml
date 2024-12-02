@@ -15,6 +15,8 @@ spec:
       image: gcr.io/kaniko-project/executor:latest
       script: |
         #!/busybox/sh
+        echo "Workspace content:"
+        ls -l $(workspaces.output.path)
         /kaniko/executor \
           --context=$(workspaces.output.path)/$(params.CONTEXT) \
           --destination=$(params.IMAGE)
