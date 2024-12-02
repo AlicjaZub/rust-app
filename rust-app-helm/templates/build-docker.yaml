@@ -8,33 +8,15 @@ spec:
       type: string
     - name: CONTEXT
       type: string
-steps:
-  - name: setup-minikube-docker-env 
-    image: bitnami/kubectl:1.19.7 
-    script: | 
-      #!/bin/sh 
-      source <(minikube docker-env --shell bash)
-
-  - name: build
-    image: docker:latest 
-    script: | 
-      #!/bin/sh 
-      source /workspace/source/minikube-docker-env
-      cd $(workspaces.source.path)
-      docker build -t $(params.IMAGE):latest .
-
-  - name: load-to-minikube 
-    image: bitnami/kubectl:1.19.7 
-    script: | 
-      #!/bin/sh 
-      source /workspace/source/minikube-docker-env 
-      minikube image load $(params.IMAGE):latest
-
-volumes:
-  - name: docker-sock 
-    hostPath: 
-      path: /var/run/docker.sock 
-stepTemplate: 
-  volumeMounts: 
-    - name: docker-sock 
-      mountPath: /var/run/docker.sock
+  steps:
+    - name: build
+      image: docker:latest
+      script: |
+        #!/bin/sh
+        cd $(workspaces.source.path) 
+        docker build -t $(params.IMAGE):latest
+    - name: load-to-minikube 
+      image: bitnami/kubectl:1.19.7 
+      script: | 
+        #!/bin/sh 
+        minikube image load $(params.IMAGE):latest
