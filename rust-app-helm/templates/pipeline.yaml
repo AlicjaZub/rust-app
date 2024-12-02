@@ -49,4 +49,4 @@ spec:
         - name: IMAGE
           value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         - name: CONTEXT
-          value: "/workspace/shared-data"
+          value: "/workspace/shared-data/"
