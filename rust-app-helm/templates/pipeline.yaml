@@ -19,31 +19,31 @@ metadata:
   name: clone-build-push
   namespace: default
 spec:
-  description: | 
+  description: |
     This pipeline clones a git repo, builds a Docker image and
     pushes it to a registry
   params:
-  - name: repo-url
-    type: string
+    - name: repo-url
+      type: string
   workspaces:
-  - name: shared-data
+    - name: shared-data
   tasks:
-  - name: fetch-source
-    taskRef:
-      name: git-clone
-    workspaces:
-    - name: source
-      workspace: shared-data
-    params:
-      - name: url
-        value: "https://github.com/AlicjaZub/rust-app.git"
-      - name: revision
-        value: "main"
-  - name: build-docker-image
-    taskRef:
-      name: build-docker
-    params:
-      - name: IMAGE
-        value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-      - name: CONTEXT
-        value: "/workspace/source"
+    - name: fetch-source
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-data
+      params:
+        - name: url
+          value: "https://github.com/AlicjaZub/rust-app.git"
+        - name: revision
+          value: "main"
+    - name: build-docker-image
+      taskRef:
+        name: build-docker
+      params:
+        - name: IMAGE
+          value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        - name: CONTEXT
+          value: "/workspace/output"
