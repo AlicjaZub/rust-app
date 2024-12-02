@@ -12,7 +12,7 @@ spec:
     - name: output
   steps:
     - name: build
-      image: gcr.io/kaniko-project/executor:latest
+      image: ubuntu
       script: |
         #!/bin/sh
         echo "Workspace content:"
