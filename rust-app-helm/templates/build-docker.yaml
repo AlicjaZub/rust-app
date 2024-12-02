@@ -13,7 +13,7 @@ spec:
       image: docker:latest
       script: |
         #!/bin/sh
-        cd $(params.CONTEXT)/rust-app
+        cd $(params.CONTEXT)rust-app
         docker build -t $(params.IMAGE):latest
     - name: load-to-minikube 
       image: bitnami/kubectl:1.19.7 
