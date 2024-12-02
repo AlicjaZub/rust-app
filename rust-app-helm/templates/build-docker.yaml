@@ -16,9 +16,9 @@ spec:
       script: |
         #!/bin/sh
         cd $(params.CONTEXT)
-        docker build -t $(params.IMAGE):latest
+        docker build -t $(params.IMAGE)
     - name: load-to-minikube 
       image: bitnami/kubectl:1.19.7 
       script: | 
         #!/bin/sh 
-        minikube image load $(params.IMAGE):latest
+        minikube image load $(params.IMAGE)
