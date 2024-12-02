@@ -39,11 +39,11 @@ spec:
         value: "https://github.com/your-repository.git"
       - name: revision
         value: "main"
-  # - name: build-docker-image
-  #   taskRef:
-  #     name: build-docker
-  #   params:
-  #     - name: IMAGE
-  #       value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-  #     - name: CONTEXT
-  #       value: "/workspace/source"
+  - name: build-docker-image
+    taskRef:
+      name: build-docker
+    params:
+      - name: IMAGE
+        value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+      - name: CONTEXT
+        value: "shared-workspace/repo"
