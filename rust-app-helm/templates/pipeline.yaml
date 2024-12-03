@@ -25,6 +25,8 @@ spec:
   params:
     - name: repo-url
       type: string
+    - name: image
+      type: string
   workspaces:
     - name: shared-data
   tasks:
@@ -42,8 +44,8 @@ spec:
       taskRef:
         name: buildah-task
       params:
-        - name: IMAGE
-          value: $(params.IMAGE)
+        - name: image
+          value: $(params.image)
       workspaces:
         - name: source
           workspace: shared-data
