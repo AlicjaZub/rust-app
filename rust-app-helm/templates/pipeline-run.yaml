@@ -19,4 +19,4 @@ spec:
   - name: repo-url
     value: https://github.com/AlicjaZub/rust-app.git
   - name: image
-    value: "rust-app:latest"
+    value: "example.com/rust-app:latest"
