@@ -1,4 +1,4 @@
-FROM localhost:64162/rust:latest AS builder
+FROM rust:latest AS builder
 
 WORKDIR /app
 COPY . .
