@@ -24,10 +24,8 @@ spec:
     - name: load-into-minikube
       image: quay.io/buildah/stable:latest
       script: |
-        #!/bin/sh
-        set -ex
-        buildah images
-        buildah images -q $(params.image) || echo "Image not found"
-        buildah save -o /tmp/image.tar $(params.image) || echo "Failed to save the image"
+        #!/bin/bash
+        set -e
+        buildah save -o /tmp/rust-app.tar localhost/rust-app:latest
         eval $(minikube docker-env)
-        docker load < /tmp/image.tar || echo "Failed to load image into Minikube"
+        docker load < /tmp/rust-app.tar
