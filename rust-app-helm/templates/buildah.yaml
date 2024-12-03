@@ -20,13 +20,11 @@ spec:
         #!/bin/bash
         set -e
         # Build the image
-        buildah bud --layers -t $(params.image) $(workspaces.source.path)
-    - name: load-into-minikube
-      image: quay.io/buildah/stable:latest
-      script: |
-        #!/bin/bash
-        set -e
-        buildah images -a
-
-        eval $(minikube docker-env)
-# docker load < /tmp/rust-app.tar        buildah push rust-app:latest oci:/tmp/rust-app.tar
+        buildah bud --layers -t "localhost:5000/$params.image" $(workspaces.source.path)
+        buildah push "localhost:5000/$params_image"
+    # - name: load-into-minikube
+    #   image: quay.io/buildah/stable:latest
+    #   script: |
+    #     #!/bin/bash
+    #     set -e
+    #     buildah push localhost:5000/rust-app
