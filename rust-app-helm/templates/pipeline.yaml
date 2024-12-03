@@ -37,18 +37,27 @@ spec:
       params:
         - name: url
           value: "https://github.com/AlicjaZub/rust-app.git"
-        - name: revision
-          value: "main"
-    - name: build-push
-      runAfter: ["fetch-source"]
+
+    - name: build-and-push
       taskRef:
-        name: kaniko
+        name: buildah-task
+      params:
+        - name: IMAGE
+          value: $(params.IMAGE)
       workspaces:
         - name: source
           workspace: shared-data
-      params:
-        - name: IMAGE
-          value: "rust-app:latest"
+
+    # - name: build-push
+    #   runAfter: ["fetch-source"]
+    #   taskRef:
+    #     name: kaniko
+    #   workspaces:
+    #     - name: source
+    #       workspace: shared-data
+    #   params:
+    #     - name: IMAGE
+    #       value: "rust-app:latest"
 
 
     # - name: build-docker-image

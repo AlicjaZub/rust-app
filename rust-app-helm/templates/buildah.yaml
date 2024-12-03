@@ -1,0 +1,27 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: buildah-task
+spec:
+  params:
+    - name: IMAGE
+      description: "The image to build and push"
+      type: string
+  workspaces:
+    - name: source
+      description: "Source code workspace"
+  steps:
+    - name: build
+      image: quay.io/buildah/stable:latest
+      script: |
+        #!/bin/bash
+        set -e
+        # Build the image
+        buildah bud --layers -t $(params.IMAGE) $(workspaces.source.path)
+    - name: push
+      image: quay.io/buildah/stable:latest
+      script: |
+        #!/bin/bash
+        set -e
+        # Push the image
+        buildah push $(params.IMAGE)
