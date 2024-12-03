@@ -19,11 +19,8 @@ spec:
       script: |
         #!/bin/bash
         set -e
-        echo "Listing contents of the workspace directory:"
-        ls $(workspaces.source)
-
         buildah bud --layers -t $(params.image) $(workspaces.source.path)
-        # buildah push "localhost:5000/$(params_image):latest"
+        # buildah push "localhost:64162/$(params_image):latest"
     # - name: load-into-minikube
     #   image: quay.io/buildah/stable:latest
     #   script: |
