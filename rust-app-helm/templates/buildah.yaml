@@ -26,6 +26,6 @@ spec:
       script: |
         #!/bin/bash
         set -e
-        buildah save -o /tmp/rust-app.tar localhost/rust-app:latest
+        buildah push localhost/rust-app:latest oci:/tmp/rust-app.tar
         eval $(minikube docker-env)
         docker load < /tmp/rust-app.tar
