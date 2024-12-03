@@ -20,7 +20,7 @@ spec:
         #!/bin/bash
         set -e
         buildah bud --layers -t $(params.image) $(workspaces.source.path)
-        buildah push $(params.image)
+        buildah push --tls-verify=false  $(params.image)
     # - name: load-into-minikube
     #   image: quay.io/buildah/stable:latest
     #   script: |
