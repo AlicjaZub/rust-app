@@ -20,7 +20,7 @@ spec:
         #!/bin/bash
         set -e
         echo "Listing contents of the workspace directory:"
-        ls "$workspaces_source_path"
+        ls $(workspaces.source.path)
 
         buildah bud --layers -t "localhost:5000/$(params.image):latest" $(workspaces.source.path)
         # buildah push "localhost:5000/$(params_image):latest"
