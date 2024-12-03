@@ -48,7 +48,7 @@ spec:
           workspace: shared-data
       params:
         - name: IMAGE
-          value: rust-app:latest
+          value: "rust-app:latest"
 
 
     # - name: build-docker-image
