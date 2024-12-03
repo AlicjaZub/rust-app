@@ -44,11 +44,11 @@ spec:
       taskRef:
         name: kaniko
       workspaces:
-      - name: output
-        workspace: shared-data
+        - name: output
+          workspace: shared-data
       params:
-      - name: IMAGE
-        value: rust-app:latest
+        - name: IMAGE
+          value: rust-app:latest
 
 
     # - name: build-docker-image
