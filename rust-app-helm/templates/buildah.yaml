@@ -22,9 +22,9 @@ spec:
         # Build the image
         buildah bud --layers -t $(params.image) $(workspaces.source.path)
     - name: load-into-minikube
-        image: quay.io/buildah/stable:latest
-        script: |
-          #!/bin/bash
-          set -e
-          # Save and load the image into Minikube's runtime
-          buildah push $(params.image) docker-daemon:$(params.image)
+      image: quay.io/buildah/stable:latest
+      script: |
+        #!/bin/bash
+        set -e
+        # Save and load the image into Minikube's runtime
+        buildah push $(params.image) docker-daemon:$(params.image)
