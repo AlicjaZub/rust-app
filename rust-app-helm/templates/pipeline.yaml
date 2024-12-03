@@ -32,7 +32,7 @@ spec:
       taskRef:
         name: git-clone
       workspaces:
-        - name: source
+        - name: output
           workspace: shared-data
       params:
         - name: url
