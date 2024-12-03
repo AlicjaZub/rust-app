@@ -48,7 +48,7 @@ spec:
         workspace: shared-data
       params:
       - name: IMAGE
-        value: $(params.IMAGE)
+        value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
 
 
     # - name: build-docker-image
