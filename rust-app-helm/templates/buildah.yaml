@@ -12,6 +12,9 @@ spec:
       description: "Source code workspace"
   steps:
     - name: build
+      env:
+        - name: STORAGE_DRIVER
+          value: vfs
       image: quay.io/buildah/stable:latest
       script: |
         #!/bin/bash
