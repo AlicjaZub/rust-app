@@ -21,9 +21,3 @@ spec:
         set -e
         buildah bud --layers -t $(params.image) $(workspaces.source.path)
         buildah push --tls-verify=false  $(params.image)
-    # - name: load-into-minikube
-    #   image: quay.io/buildah/stable:latest
-    #   script: |
-    #     #!/bin/bash
-    #     set -e
-    #     buildah push localhost:5000/rust-app
