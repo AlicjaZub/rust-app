@@ -20,8 +20,8 @@ spec:
         #!/bin/bash
         set -e
         # Build the image
-        buildah bud --layers -t "localhost:5000/$params.image:latest" $(workspaces.source.path)
-        buildah push "localhost:5000/$params_image:latest"
+        buildah bud --layers -t "localhost:5000/$(params.image):latest" $(workspaces.source.path)
+        buildah push "localhost:5000/$(params_image):latest"
     # - name: load-into-minikube
     #   image: quay.io/buildah/stable:latest
     #   script: |
