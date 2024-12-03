@@ -27,6 +27,6 @@ spec:
         #!/bin/bash
         set -e
         buildah images -a
-        buildah push rust-app:latest oci:/tmp/rust-app.tar
+
         eval $(minikube docker-env)
-        docker load < /tmp/rust-app.tar
+# docker load < /tmp/rust-app.tar        buildah push rust-app:latest oci:/tmp/rust-app.tar
