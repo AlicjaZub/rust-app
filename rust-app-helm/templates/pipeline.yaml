@@ -41,6 +41,8 @@ spec:
           value: "https://github.com/AlicjaZub/rust-app.git"
 
     - name: build-and-push
+      runAfter:
+        - fetch-source
       taskRef:
         name: buildah-task
       params:
