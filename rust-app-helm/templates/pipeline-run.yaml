@@ -19,4 +19,4 @@ spec:
   - name: repo-url
     value: https://github.com/AlicjaZub/rust-app.git
   - name: image
-    value: "example.com/rust-app:latest"
+    value: "registry.kube-system.svc.cluster.local/rust-app:latest"
