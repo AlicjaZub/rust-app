@@ -24,7 +24,10 @@ spec:
     - name: load-into-minikube
       image: quay.io/buildah/stable:latest
       script: |
-        #!/bin/bash
-        set -e
-        # Save and load the image into Minikube's runtime
-        buildah push $(params.image) docker-daemon:$(params.image)
+        #!/bin/sh
+        set -ex
+        buildah images
+        buildah images -q $(params.image) || echo "Image not found"
+        buildah save -o /tmp/image.tar $(params.image) || echo "Failed to save the image"
+        eval $(minikube docker-env)
+        docker load < /tmp/image.tar || echo "Failed to load image into Minikube"
