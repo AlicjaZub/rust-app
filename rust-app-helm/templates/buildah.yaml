@@ -19,8 +19,8 @@ spec:
       script: |
         #!/bin/bash
         set -e
-        buildah bud --layers -t $(params.image) $(workspaces.source.path)
-        buildah push localhost:64162/$(params.image):latest
+        buildah bud --layers -t localhost:64162/$(params.image) $(workspaces.source.path)
+        buildah push localhost/rust-app localhost:64162/$(params.image)
     # - name: load-into-minikube
     #   image: quay.io/buildah/stable:latest
     #   script: |
