@@ -39,16 +39,28 @@ spec:
           value: "https://github.com/AlicjaZub/rust-app.git"
         - name: revision
           value: "main"
-    - name: build-docker-image
-      workspaces:
-        - name: output
-          workspace: shared-data
+    - name: build-push
+      runAfter: ["fetch-source"]
       taskRef:
-        name: build-docker
+        name: kaniko
+      workspaces:
+      - name: output
+        workspace: shared-data
       params:
-        - name: IMAGE
-          value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        - name: CONTEXT
-          value: "/workspace/output/"
-      runAfter: 
-        - fetch-source
+      - name: IMAGE
+        value: $(params.IMAGE)
+
+
+    # - name: build-docker-image
+    #   workspaces:
+    #     - name: output
+    #       workspace: shared-data
+    #   taskRef:
+    #     name: build-docker
+    #   params:
+    #     - name: IMAGE
+    #       value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+    #     - name: CONTEXT
+    #       value: "/workspace/output/"
+    #   runAfter: 
+    #     - fetch-source
