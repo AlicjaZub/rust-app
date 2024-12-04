@@ -1,18 +1,3 @@
-# apiVersion: tekton.dev/v1beta1
-# kind: Pipeline
-# metadata:
-#   name: build-and-deploy-pipeline
-# spec:
-#   tasks:
-#     - name: build-docker-image
-#       taskRef:
-#         name: build-docker
-#       params:
-#         - name: IMAGE
-#           value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-#         - name: CONTEXT
-#           value: "/workspace/source"
-
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
@@ -39,7 +24,6 @@ spec:
       params:
         - name: url
           value: "https://github.com/AlicjaZub/rust-app.git"
-
     - name: build-and-push
       runAfter:
         - fetch-source
@@ -51,29 +35,3 @@ spec:
       workspaces:
         - name: source
           workspace: shared-data
-
-    # - name: build-push
-    #   runAfter: ["fetch-source"]
-    #   taskRef:
-    #     name: kaniko
-    #   workspaces:
-    #     - name: source
-    #       workspace: shared-data
-    #   params:
-    #     - name: IMAGE
-    #       value: "rust-app:latest"
-
-
-    # - name: build-docker-image
-    #   workspaces:
-    #     - name: output
-    #       workspace: shared-data
-    #   taskRef:
-    #     name: build-docker
-    #   params:
-    #     - name: IMAGE
-    #       value: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-    #     - name: CONTEXT
-    #       value: "/workspace/output/"
-    #   runAfter: 
-    #     - fetch-source
