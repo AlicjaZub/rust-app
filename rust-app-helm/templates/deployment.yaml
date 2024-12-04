@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: rust-app
-        image: "10.102.83.186/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        image: "registry.kube-system.svc.cluster.local/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: Always
         ports:
           - containerPort: 8000
