@@ -17,6 +17,6 @@ spec:
             - name: "eventTypes"
               value: ["push"]
       bindings:
-        - ref: github-binding
+        - ref: github-listener-binding
       template:
-        ref: github-template
+        ref: pipeline-template
